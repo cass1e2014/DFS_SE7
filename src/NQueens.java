@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -50,6 +51,52 @@ import java.util.List;
  */
 public class NQueens {
 	public List<String[]> solveNQueens(int n) {
-		
+		List<String[]> result = new ArrayList<String[]>();
+		if (n <= 0) {
+			return result;
+		}
+
+		int[] columnVal = new int[n];// 列
+		DFS_Helper(n, result, 0, columnVal);
+		return result;
 	}
+
+	public void DFS_Helper(int n, List<String[]> result, int row,
+			int[] columnVal) {
+		if (row == n) {
+			String[] unit = new String[n];
+			for(int i = 0 ; i < n; i ++){
+				//每一行都要new一个新的stringbuilder
+				StringBuilder sb = new StringBuilder();
+				for(int j = 0; j < n; j ++){
+					if(j == columnVal[i]){
+						sb.append("Q");
+					}else{
+						sb.append(".");
+					}
+				}
+				unit[i] = sb.toString();
+			}
+			
+		} else {
+			for (int i = 0; i < n; i++) {
+				columnVal[row] = i;// (row,columnVal[row)==>(row,i)
+				if(isValid(row, columnVal)){
+					DFS_Helper(n, result, row+1, columnVal);
+				}
+			}
+		}
+	}
+	
+	public boolean isValid(int row, int[] columnVal){
+		//for loop传入的每一行
+		for(int i = 0; i < row; i ++){
+			//上下左右斜是否已经有其他皇后
+			if(columnVal[row] == columnVal[i] || Math.abs(columnVal[row] - columnVal[i]) == row - i){
+				return false;
+			}
+		}
+		return true;
+	}
+
 }
