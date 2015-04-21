@@ -57,10 +57,10 @@ public class LetterCombinationOfAPhoneNumber {
 
 		for (char c : map.get(digits.charAt(sb.length()))) {
 			sb.append(c);
-			System.out.println("1: " + sb);
+//			System.out.println("1: " + sb);
 			helper(map, digits, sb, result);
 			sb.deleteCharAt(sb.length() - 1);
-			System.out.println("2: " + sb);
+//			System.out.println("2: " + sb);
 		}
 	}
 
