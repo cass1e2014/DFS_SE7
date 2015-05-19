@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GenerateParentheses {
 	public static void main(String[] args) {
 		GenerateParentheses gp = new GenerateParentheses();
-		ArrayList<String> res = gp.generateParenthese(2);
+		ArrayList<String> res = gp.generateParenthese(1);
 		for (String s : res) {
 			System.out.println("GenerateParentheses -- main(): " + s);
 		}
@@ -35,7 +35,8 @@ public class GenerateParentheses {
 	}
 
 	public void getPair(ArrayList<String> result, String s, int left, int right) {
-		if (left > right || left < 0 || right < 0) {
+		//left>right的情况就相当于先放了）右括号，是非法的，要跳出
+		if (left < 0 || right < 0 || left > right) {
 			return;
 		}
 
