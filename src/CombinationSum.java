@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Given a set of candidate numbers (C) and a target number (T), find all unique
@@ -26,41 +27,34 @@ public class CombinationSum {
 
 	}
 
-	public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates,
-			int target) {
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		if (candidates == null || candidates.length == 0) {
-			return result;
-		}
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		Arrays.sort(candidates);
-		combinationSumHelper(result, list, candidates, target, 0);
-		return result;
-	}
-
-	public void combinationSumHelper(ArrayList<ArrayList<Integer>> result,
-			ArrayList<Integer> list, int[] candidates, int target, int pos) {
-		if (target < 0) {
-			return;
-		}
-		// 什么时候返回？
-		if (target == 0) {
-			result.add(new ArrayList(list));
-			return;
-		}
-		for (int i = pos; i < candidates.length; i++) {
-			// for循环中第一步有一个判断，那个是为了去除重复元素产生重复结果的影响，因为在这里每个数可以重复使用，所以重复的元素也就没有作用了
-			if (i != pos && candidates[i] == candidates[i - 1]) {
-				continue;
-			}
-			list.add(candidates[i]);
-			combinationSumHelper(result, list, candidates, target
-					- candidates[i], i);// 此处不是i＋1！因为The same repeated number
-										// may be chosen unlimited number of
-										// times.
-			list.remove(list.size() - 1);
-		}
-
-	}
-
+	public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(candidates == null)  return result;
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(candidates);
+        combinationSumHelper(result, list, target, candidates, 0);
+        return result;
+    }
+    
+    public void combinationSumHelper(List<List<Integer>> result, List<Integer> list, int target, int[] candidates, int pos){
+        if(target == 0){
+            result.add(new ArrayList<Integer>(list));
+            return;
+        }
+        
+        if(target < 0){
+            return;
+        }
+        
+        for(int i = pos; i < candidates.length; i++){
+        	//211, [211]和[211]这种情况
+            if(i != pos && candidates[i] == candidates[i - 1]){
+                continue;
+            }
+            
+            list.add(candidates[i]);
+            combinationSumHelper(result, list, target - candidates[i], candidates, i);//i 元素可以被用多于一次
+            list.remove(list.size() - 1);
+        }
+    }
 }

@@ -26,36 +26,32 @@ public class CombinationSumII {
 		System.out.println(csII.combinationSum2(num, target));
 	}
 
-	public List<List<Integer>> combinationSum2(int[] num, int target) {
-		List<List<Integer>> result = new ArrayList<List<Integer>>();
-		if (num == null || num.length == 0) {
-			return result;
-		}
-		List<Integer> list = new ArrayList<Integer>();
-		Arrays.sort(num);
-		combinationSum2Helper(result, list, num, target, 0);
-		return result;
-	}
-
-	public void combinationSum2Helper(List<List<Integer>> result,
-			List<Integer> list, int[] num, int target, int pos) {
-		if(target < 0){
-			return;
-		}
-		
-		if(target == 0){
-			result.add(new ArrayList<Integer>(list));
-			return;
-		}
-		
-		for(int i = pos; i < num.length; i++){
-			if(i != pos && num[i] == num[i - 1]){
-				continue;
-			}
-			list.add(num[i]);
-			combinationSum2Helper(result, list, num, target - num[i], i + 1);//注意！此时传到下一层的pos是i+1(Each number in C may only be used once in the combination.)
-			list.remove(list.size() - 1);
-		}
-	}
-
+	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(candidates == null)  return result;
+        List<Integer> list = new ArrayList<Integer>();
+        Arrays.sort(candidates);
+        combinationSum2Helper(result, list, candidates, target, 0);
+        return result;
+    }
+    
+    public void combinationSum2Helper(List<List<Integer>> result, List<Integer> list, int[] candidates, int target, int start){
+        if(target == 0){
+            result.add(new ArrayList<Integer>(list));
+            return;
+        }
+        if(target < 0){
+            return;
+        }
+        
+        for(int i = start; i < candidates.length; i++){
+            //211, [211]和[211]这种情况
+            if(i != start && candidates[i] == candidates[i - 1]){
+                continue;
+            }
+            list.add(candidates[i]);
+            combinationSum2Helper(result, list, candidates, target - candidates[i], i + 1);//每个元素只能被用一次
+            list.remove(list.size() - 1);
+        }
+    }
 }

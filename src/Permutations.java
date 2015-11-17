@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Given a collection of numbers, return all possible permutations. For example,
@@ -18,31 +19,29 @@ public class Permutations {
 
 	}
 	
-	public ArrayList<ArrayList<Integer>> permute(int[] num){
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-		if(num == null || num.length == 0){
-			return result;
-		}
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		Arrays.sort(num);
-		permuteHelper(result, list, num);
-		return result;
-	}
-	
-	public void permuteHelper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> list, int[] num){
-		if(list.size() == num.length){
-			result.add(new ArrayList<Integer>(list));
-			return;
-		}
-		
-		for(int i = 0; i < num.length; i++){
-			if(list.contains(num[i])){
-				continue;
-			}
-			list.add(num[i]);
-			permuteHelper(result, list, num);
-			list.remove(list.size() - 1);
-		}
-	}
-
+	public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(nums == null)    return result;
+        Arrays.sort(nums);
+        List<Integer> list = new ArrayList<Integer>();
+        permuteHelper(result, list, nums);
+        return result;
+    }
+    
+    public void permuteHelper(List<List<Integer>> result, List<Integer> list, int[] nums){
+        if(list.size() == nums.length){
+            result.add(new ArrayList<Integer>(list));
+            return;
+        }
+        
+        for(int i = 0; i < nums.length; i++){
+        	//重要，必须要有的条件
+            if(list.contains(nums[i])){
+                continue;
+            }
+            list.add(nums[i]);
+            permuteHelper(result, list, nums);
+            list.remove(list.size() - 1);
+        }
+    }
 }
