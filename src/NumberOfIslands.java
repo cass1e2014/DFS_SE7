@@ -1,5 +1,21 @@
 /**
- * 
+ * Example 1:
+
+11110
+11010
+11000
+00000
+Answer: 1
+
+Example 2:
+
+11000
+11000
+00100
+00011
+Answer: 3
+ *
+ *这道求岛屿数量的题的本质是求矩阵中连续区域的个数
  * @author cassie9082
  *
  */
@@ -31,7 +47,7 @@ public class NumberOfIslands {
             return;
         }
         if(j < 0 || j >= cols){
-            return;
+            return;						
         }
         if(visited[i][j]){
             return;

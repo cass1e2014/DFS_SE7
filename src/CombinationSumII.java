@@ -45,7 +45,8 @@ public class CombinationSumII {
         }
         
         for(int i = start; i < candidates.length; i++){
-            //211, [211]和[211]这种情况
+            //Given[1,1] and target 1, if delete the below code, output will be [[1],[1]], expected: [[1]]
+        	//事实上这个depends on 给的set是否有重复元素
             if(i != start && candidates[i] == candidates[i - 1]){
                 continue;
             }

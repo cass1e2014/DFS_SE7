@@ -20,12 +20,12 @@ import java.util.Map;
  */
 public class PalindromePermutationII {
 	public List<String> generatePalindromes(String s) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<String>();//用来装左半部分的permutation
         if(s == null || s.length() == 0)    return result;
         
         //1. determine if the string s is palindrome permutated
         Map<Character, Integer> map = new HashMap<Character, Integer>();
-        if(!isPalindromePermutation(s, map))    return result;
+        if(!isPalindromePermutation(s, map))    return result;//先用字母的出现个数下去判断是否有可能做permutation
         
         //2. form the left half of the seed string
         StringBuffer sb = new StringBuffer();
@@ -46,8 +46,8 @@ public class PalindromePermutationII {
         }
         
         //3. generate the permutations of the string
-        permutation(sb.toString().toCharArray(), 0, result);
-        List<String> result2 = new ArrayList<String>();
+        permutation(sb.toString().toCharArray(), 0, result);//这里的permutation基本就是做swap
+        List<String> result2 = new ArrayList<String>();//装整个permutation，也是最后要返回的result
         
         //4. append the right half of the string
         for(String str : result){

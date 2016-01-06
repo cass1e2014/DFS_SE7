@@ -10,9 +10,9 @@ import java.util.List;
  * 
  * Note: All numbers (including target) will be positive integers. Elements in a
  * combination (a1, a2, … , ak) must be in non-descending order. (ie, a1 ≤ a2 ≤
- * … ≤ ak). The solution set must not contain duplicate combinations. For
- * example, given candidate set 2,3,6,7 and target 7, A solution set is: [7] [2,
- * 2, 3]
+ * … ≤ ak). The solution set must not contain duplicate combinations. 
+ * For example, given candidate set 2,3,6,7 and target 7, 
+ * A solution set is: [7] [2, 2, 3]
  * 
  * @author cassie9082
  * 
@@ -47,11 +47,6 @@ public class CombinationSum {
         }
         
         for(int i = pos; i < candidates.length; i++){
-        	//211, [211]和[211]这种情况
-            if(i != pos && candidates[i] == candidates[i - 1]){
-                continue;
-            }
-            
             list.add(candidates[i]);
             combinationSumHelper(result, list, target - candidates[i], candidates, i);//i 元素可以被用多于一次
             list.remove(list.size() - 1);

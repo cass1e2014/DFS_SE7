@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GenerateParentheses {
 	public static void main(String[] args) {
 		GenerateParentheses gp = new GenerateParentheses();
-		ArrayList<String> res = gp.generateParenthese(1);
+		ArrayList<String> res = gp.generateParenthese(2);
 		for (String s : res) {
 			System.out.println("GenerateParentheses -- main(): " + s);
 		}
